@@ -20,15 +20,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        lightIsOff(for: redLightView)
-        lightIsOff(for: yellowLightView)
-        lightIsOff(for: greenLightView)
+        setLightOff(for: redLightView)
+        setLightOff(for: yellowLightView)
+        setLightOff(for: greenLightView)
+        
+        changeLightButton.setTitle("Start", for: .normal)
+        
+        print(redLightView.bounds.width / 2)
     }
     
     override func viewDidLayoutSubviews() {
-        makeViewCircle(for: redLightView)
-        makeViewCircle(for: yellowLightView)
-        makeViewCircle(for: greenLightView)
+        makeCircle(from: redLightView)
+        makeCircle(from: yellowLightView)
+        makeCircle(from: greenLightView)
+        
+        print(redLightView.bounds.width / 2)
     }
 
     @IBAction func changeLightButtonDidPressed() {
@@ -40,25 +46,25 @@ class ViewController: UIViewController {
         
         switch countOfTap % 3 {
         case 1:
-            lightIsOn(for: redLightView)
-            lightIsOff(for: greenLightView)
+            setLightOn(for: redLightView)
+            setLightOff(for: greenLightView)
         case 2:
-            lightIsOn(for: yellowLightView)
-            lightIsOff(for: redLightView)
+            setLightOn(for: yellowLightView)
+            setLightOff(for: redLightView)
         default:
-            lightIsOn(for: greenLightView)
-            lightIsOff(for: yellowLightView)
+            setLightOn(for: greenLightView)
+            setLightOff(for: yellowLightView)
         }
     }
     
-    private func lightIsOff(for light: UIView) {
+    private func setLightOff(for light: UIView) {
         light.alpha = 0.3
     }
-    private func lightIsOn(for light: UIView) {
+    private func setLightOn(for light: UIView) {
         light.alpha = 1
     }
-    private func makeViewCircle(for view: UIView) {
-        view.layer.cornerRadius = view.frame.width / 2
+    private func makeCircle(from view: UIView) {
+        view.layer.cornerRadius = view.bounds.width / 2
     }
 }
 
